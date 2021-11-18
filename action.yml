@@ -1,0 +1,22 @@
+name: markdown2man
+description: A GitHub Action to convert a markdown document into a man page.
+branding:
+  icon: book-open
+  color: blue
+inputs:
+  markdown_file:  # id of input
+    description: Markdown file pathname to convert, relative to repository root.
+    required: false
+    default: README.md
+  manpage_file:
+    description: Man page file pathname for converted document, relative to repository root.
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Install Pandoc to generate man page.
+      uses: r-lib/actions/setup-pandoc@v1
+      
+    - name: Run conversion script.
+      run: ${{ github.action_path }}/markdown2man ${{ inputs.markdown_file }} ${{ inputs.manpage_file }}
+      shell: python

@@ -6,6 +6,7 @@ from typing import List, Dict
 
 DEFAULT_MANPAGE_SECTION = 1
 
+
 def _check_file_exists(file: str)-> str:
     """ Check given file actually exists.
 

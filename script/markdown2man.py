@@ -36,7 +36,7 @@ def parse_args(args: List[str]) -> Dict[str]:
                         metavar="MARKDOWN_FILE")
     parser.add_argument("manpage_name",
                         type=str,
-                        help="Name for resulting manpage. Do not add extension.",
+                        help="Name for resulting manpage file. Do not add extension.",
                         metavar="MANPAGE_NAME")
     parser.add_argument("-s", "--manpage_section",
                         type=str,
@@ -44,6 +44,10 @@ def parse_args(args: List[str]) -> Dict[str]:
                         help=f"Section for resulting manpage. Defaults to "
                              f"{DEFAULT_MANPAGE_SECTION}",
                         metavar="MANPAGE_SECTION")
+    parser.add_argument("-t", "--manpage_title",
+                        type=str,
+                        help="Title for resulting manpage. Defaults to manpage_name.",
+                        metavar="MANPAGE_TITLE")
     parser.add_argument("-u", "--uncompressed",
                         type=bool,
                         action="store_true",

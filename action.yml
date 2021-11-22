@@ -20,6 +20,10 @@ inputs:
     description: Output folder for converted man page.
     required: false
     default: "."
+  manpage_title:
+    description: Title for converted manpage.
+    required: false
+    default: "Usage documentation"
 
 runs:
   using: "composite"
@@ -28,5 +32,5 @@ runs:
       uses: r-lib/actions/setup-pandoc@v1
       
     - name: Run conversion script.
-      run: ${{ github.action_path }}/markdown2man ${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -f ${{ inputs.manpage_folder }} -u
+      run: ${{ github.action_path }}/script/markdown2man.py ${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -f ${{ inputs.manpage_folder }} -u -t ${{ inputs.manpage_title }}
       shell: bash

@@ -41,7 +41,7 @@ def test_preprocess_source_file():
         original_text = original_file.read()
     expected_text = ""
     with open("tests/resources/README_no_badge_with_header.md") as expected_file:
-        expected_file = expected_file.read()
+        expected_text = expected_file.read()
     # Perform test.
     converted_file = m2mlib.preprocess_source_file("tests/resources/README.md", "cifra", "1", "cifra usage documentation")
     recovered_text = ""
@@ -55,13 +55,13 @@ def test_convert_file(temp_dir):
     expected_text = ""
     with open("tests/resources/cifra.1") as manpage:
         expected_text = manpage.read()
-    temp_pathname = os.path.join(temp_dir, "README.md")
-    test_ops.copy_file("tests/resources/README.md", temp_pathname)
+    temp_pathname = os.path.join(temp_dir, "README_no_badge_with_header.md")
+    test_ops.copy_file("tests/resources/README_no_badge_with_header.md", temp_pathname)
     # Perform text.
     converted_pathname = m2mlib.convert_file(temp_pathname, "cifra", "1")
     with open(converted_pathname) as converted_file:
         recovered_text = converted_file.read()
-    assert expected_text == recovered_text
+    assert recovered_text == expected_text
 
 
 def test_compress_manpage(temp_dir):

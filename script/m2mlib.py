@@ -3,6 +3,11 @@
 This library should be enough to take a GitHub README.md file strip any GitHub
 badge and convert it to a valid manpage.
 """
+import gzip
+import os
+import pypandoc
+import shutil
+import tempfile
 
 
 def remove_badges(text: str) -> str:
@@ -42,7 +47,17 @@ def preprocess_source_file(source_file: str, manpage_name: str, manpage_section:
     :param manpage_title: Manpage title to set at header.
     :return: Pathname to modified file at its temporal location.
     """
-    raise NotImplementedError
+    # I don't use TemporaryDirectory() context manager because we need created temporal folder
+    # persists until modified_markdown_file is retrieved from outside of this function.
+    temp_dir = tempfile.mkdtemp()
+    with open(source_file) as markdown_file:
+        markdown_content = markdown_file.read()
+        markdown_content = remove_badges(markdown_content)
+        markdown_content = add_man_header(markdown_content, manpage_name, manpage_section, manpage_title)
+        modified_markdown_file_pathname = os.path.join(temp_dir, f"{manpage_name}.{manpage_section}")
+        with open(modified_markdown_file_pathname, "wt+") as modified_markdown_file:
+            modified_markdown_file.write(markdown_content)
+        return modified_markdown_file_pathname
 
 
 def convert_file(source_file: str, output_name: str, manpage_section: str) -> str:
@@ -50,23 +65,33 @@ def convert_file(source_file: str, output_name: str, manpage_section: str) -> st
 
     Conversion is performed using pandoc.
 
-    Be aware that resulting manpage won't be compressed yet.
+    Be aware that resulting manpage won't be compressed yet and will be located at the same folder
+    than source_file.
 
     :param source_file: Markdown to convert. You'd better use here preprocesss_source_file() output.
     :param output_name: Name for resulting manpage.
     :param manpage_section: Manpage section to add as extension.
     :return: Pathname to resulting manpage.
     """
-    raise NotImplementedError
+    output_file_pathname = os.path.join(os.path.dirname(source_file), f"{output_name}.{manpage_section}")
+    pypandoc.convert(source_file, "man", outputfile=output_file_pathname, extra_args=["--standalone"])
+    return output_file_pathname
 
 
 def compress_manpage(file_to_compress) -> str:
     """ Compress given manpage to a .gz file.
 
+    Resulting compressed file will be located at the same folder than file_to_compress.
+
     :param file_to_compress: Manpage file to compress.
     :return: Resulting compressed file pathname.
     """
-    raise NotImplementedError
+    compressed_file_pathname = os.path.join(os.path.dirname(file_to_compress),
+                                            f"{os.path.basename(file_to_compress)}.gz")
+    with open(file_to_compress, 'rb') as f_in:
+        with gzip.open(compressed_file_pathname, 'wb') as f_out:
+            shutil.copyfileobj(f_in, f_out)
+    return compressed_file_pathname
 
 
 def copy_manpage(source_file: str, destination_folder: str) -> None:
@@ -75,4 +100,4 @@ def copy_manpage(source_file: str, destination_folder: str) -> None:
     :param source_file: Current manpage pathname.
     :param destination_folder: Folder to copy on source_file.
     """
-    raise NotImplementedError
+    shutil.copy(source_file, destination_folder)

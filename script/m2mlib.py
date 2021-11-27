@@ -54,7 +54,7 @@ def preprocess_source_file(source_file: str, manpage_name: str, manpage_section:
         markdown_content = markdown_file.read()
         markdown_content = remove_badges(markdown_content)
         markdown_content = add_man_header(markdown_content, manpage_name, manpage_section, manpage_title)
-        modified_markdown_file_pathname = os.path.join(temp_dir, f"{manpage_name}.{manpage_section}")
+        modified_markdown_file_pathname = os.path.join(temp_dir, os.path.basename(source_file))
         with open(modified_markdown_file_pathname, "wt+") as modified_markdown_file:
             modified_markdown_file.write(markdown_content)
         return modified_markdown_file_pathname

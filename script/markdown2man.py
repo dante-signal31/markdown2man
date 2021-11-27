@@ -21,11 +21,11 @@ def _check_file_exists(file: str) -> str:
         raise argparse.ArgumentTypeError(f"Given file {file} does not exists.")
 
 
-def parse_args(args: List[str]) -> Dict[str]:
+def parse_args(args: List[str]) -> Dict[str, str]:
     """ Parse given arguments
 
     :param args: Program arguments.
-    :returns: A Dictionary wig given arguments as keys and its respective values.
+    :returns: A Dictionary with given arguments as keys and its respective values.
     """
     parser = argparse.ArgumentParser(
         description="Console command to convert a markdown document into a man page.",
@@ -51,7 +51,6 @@ def parse_args(args: List[str]) -> Dict[str]:
                         help="Title for resulting manpage. Defaults to manpage_name.",
                         metavar="MANPAGE_TITLE")
     parser.add_argument("-u", "--uncompressed",
-                        type=bool,
                         action="store_true",
                         default=False,
                         help="Do not compress resulting manpage. Defaults to False")

@@ -14,7 +14,7 @@ def test_remove_badges():
         original_text = original_file.read()
     expected_text = ""
     with open("tests/resources/README_no_badge.md") as expected_file:
-        expected_file = expected_file.read()
+        expected_text = expected_file.read()
     # Perform test.
     recovered_text = m2mlib.remove_badges(original_text)
     assert expected_text == recovered_text
@@ -27,7 +27,7 @@ def test_add_man_header():
         original_text = original_file.read()
     expected_text = ""
     with open("tests/resources/README_no_badge_with_header.md") as expected_file:
-        expected_file = expected_file.read()
+        expected_text = expected_file.read()
     # Perform test.
     recovered_text = m2mlib.add_man_header(original_text, "cifra", "1",
                                           "cifra usage documentation")

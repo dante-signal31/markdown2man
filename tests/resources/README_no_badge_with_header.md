@@ -1,4 +1,4 @@
-# % cifra(1) | cifra usage documentation
+% cifra(1) | cifra usage documentation
 
 # NAME
 **cifra** — Library and console command to crypt and decrypt texts using classic methods.

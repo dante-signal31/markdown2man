@@ -11,7 +11,8 @@ def remove_badges(text: str) -> str:
     :param text: Original text.
     :return: Text with Github badges removed.
     """
-    raise NotImplementedError
+    new_text = "\n".join((line for line in text.splitlines() if "![" not in line))
+    return new_text
 
 
 def add_man_header(text: str, name, section, title) -> str:
@@ -24,7 +25,9 @@ def add_man_header(text: str, name, section, title) -> str:
     :return: Text with header added.
     """
     # % cifra(1) | cifra usage documentation
-    raise NotImplementedError
+    header = f"% {name}({section}) | {title}"
+    new_text = "\n".join([header, text])
+    return new_text
 
 
 def preprocess_source_file(source_file: str, manpage_name: str, manpage_section: int, manpage_title: str) -> str:

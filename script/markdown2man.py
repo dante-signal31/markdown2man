@@ -9,7 +9,7 @@ from m2mlib import *
 DEFAULT_MANPAGE_SECTION = 1
 
 
-def _check_file_exists(file: str)-> str:
+def _check_file_exists(file: str) -> str:
     """ Check given file actually exists.
 
     :param file: File to check.

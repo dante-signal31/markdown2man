@@ -23,6 +23,7 @@ def add_man_header(text: str, name, section, title) -> str:
     :param title: Title for this page.
     :return: Text with header added.
     """
+    # % cifra(1) | cifra usage documentation
     raise NotImplementedError
 
 

@@ -30,6 +30,10 @@ runs:
   steps:
     - name: Install Pandoc to generate man page.
       uses: r-lib/actions/setup-pandoc@v1
+
+    - name: Generate virtualenv to run script.
+
+    - name: Install script dependencies.
       
     - name: Run conversion script.
       run: ${{ github.action_path }}/script/markdown2man.py ${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -f ${{ inputs.manpage_folder }} -u -t ${{ inputs.manpage_title }}

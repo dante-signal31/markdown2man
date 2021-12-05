@@ -26,13 +26,10 @@ inputs:
     default: "Usage documentation"
 
 runs:
-  using: "composite"
-  steps:
-    - name: Install Pandoc to generate man page.
-      uses: r-lib/actions/setup-pandoc@v1
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    WORKING_FOLDER: /work
 
-# Command to run: docker run -ti -v ~/Downloads:/work/ dantesignal31/markdown2man:latest /work/README.md mancifra
-
-    - name: Run conversion script.
-      run: ${{ github.action_path }}/script/markdown2man.py ${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -f ${{ inputs.manpage_folder }} -u -t ${{ inputs.manpage_title }}
-      shell: bash
+  args:
+    - -v ./:${{ env.WORKING_FOLDER }} ${{ env.WORKING_FOLDER }}/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f ${{ env.WORKING_FOLDER }}/${{ inputs.manpage_folder }}

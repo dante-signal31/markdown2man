@@ -74,7 +74,7 @@ def convert_file(source_file: str, output_name: str, manpage_section: str) -> st
     :return: Pathname to resulting manpage.
     """
     output_file_pathname = os.path.join(os.path.dirname(source_file), f"{output_name}.{manpage_section}")
-    pypandoc.convert(source_file, "man", outputfile=output_file_pathname, extra_args=["--standalone"])
+    pypandoc.convert_file(source_file, "man", outputfile=output_file_pathname, extra_args=["--standalone"])
     return output_file_pathname
 
 

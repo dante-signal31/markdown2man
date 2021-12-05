@@ -1,0 +1,70 @@
+name: test_and_merge
+
+on:
+    push:
+      branches: [ staging ]
+    pull_request:
+      branches: [ staging ]
+
+    workflow_dispatch:
+
+jobs:
+    unit-tests:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get source code from repository.
+          uses: actions/checkout@v2
+
+        - name: Run unit-tests.
+          shell: bash
+          run: |
+            python -m pytest
+    
+    merge-testing:
+      runs-on: ubuntu-latest
+      needs: unit-tests
+      steps:
+        - name: Get source code from repository,
+          uses: actions/checkout@v2
+
+        - name: Merge staging with testing.
+          uses: devmasx/merge-branch@master
+          with:
+            type: now
+            from_branch: staging
+            target_branch: testing
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    integration-tests:
+      runs-on: ubuntu-latest
+      needs: merge-testing
+      steps:
+        - name: Get source code from repository.
+          uses: actions/checkout@v2
+
+        - name: Try to use markdown2man action at testing branch to build our test manpage.
+          uses: dante-signal31/markdown2man@testing
+          with:
+              markdown_file: tests/resources/README.md
+              manpage_name: cifra
+              manpage_section: 1
+
+        - name: Check that markdown actually generated a correct manpage.
+          shell: bash
+          run: |
+            test -f tests/resources/cifra.1.gz || { echo "Manpage not found"; exit 1; }
+
+    merge-master:
+      runs-on: ubuntu-latest
+      needs: integration-tests
+      steps:
+        - name: Get source code from repository.
+          uses: actions/checkout@v2
+
+        - name: Merge staging with master.
+          uses: devmasx/merge-branch@master
+          with:
+            type: now
+            from_branch: staging
+            target_branch: master
+            github_token: ${{ secrets.GITHUB_TOKEN }}

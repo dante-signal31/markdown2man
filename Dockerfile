@@ -13,18 +13,21 @@ RUN set -e
 RUN apt-get update \
     && apt-get install pandoc -y
 
-# Get markdown2man dependencies.
-#WORKDIR /usr/src/markdown2man
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+#RUN apt-get install python3-pip -y
+
 
 # Set folder for our script.
 ENV SCRIPT_PATH /script
 # Update PYTHONPATH to find out lib.
 ENV PYTHONPATH "${PYTHONPATH}:${SCRIPT_PATH}/"
 
+# Get markdown2man dependencies.
+COPY requirements.txt $SCRIPT_PATH/
+RUN pip install --no-cache-dir -r $SCRIPT_PATH/requirements.txt
+
 # Copy markdown2man src.
-COPY src/* $SCRIPT_PATH/
+COPY src/lib/* $SCRIPT_PATH/lib/
+COPY src/markdown2man.py $SCRIPT_PATH/
 RUN chmod 755 $SCRIPT_PATH/markdown2man.py
 
 # Set markdown2man as this image entrypoint.

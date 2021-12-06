@@ -89,6 +89,7 @@ def main(args=sys.argv[1:]) -> None:
     m2mlib.copy_manpage(
         source_file=manpage,
         destination_folder=arguments.get("manpage_folder", os.path.dirname(arguments["markdown_file"])))
+    print(f"Default manpage folder: {os.path.dirname(arguments['markdown_file'])}")
     print(os.listdir("src/tests/resources/"))
 
 if __name__ == "__main__":

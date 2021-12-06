@@ -7,6 +7,7 @@ import tempfile
 import test_common.fs.ops as test_ops
 from test_common.fs.temp import temp_dir
 
+# TODO: Refactor project layout to leave tests folder out of src.
 sys.path.append("src")
 import src.markdown2man as markdown2man
 

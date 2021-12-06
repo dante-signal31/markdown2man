@@ -16,9 +16,11 @@ def _check_file_exists(file: str) -> str:
     :return: Given string if it is actually a file.
     """
     if os.path.exists(file):
+        print(f"Current file exists: {file}")
         return file
     else:
-        print(f"Current folder contents: {os.listdir(os.path.join(os.getcwd(), 'src'))}")
+        # os.path.join(os.getcwd(), 'src')
+        print(f"Current folder contents: {os.listdir(os.getcwd())}")
         raise argparse.ArgumentTypeError(f"Given file {file} does not exists.")
 
 

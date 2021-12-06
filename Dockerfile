@@ -14,7 +14,7 @@ RUN apt-get update \
     && apt-get install pandoc -y
 
 # Get markdown2man dependencies.
-WORKDIR /usr/src/markdown2man
+#WORKDIR /usr/src/markdown2man
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 

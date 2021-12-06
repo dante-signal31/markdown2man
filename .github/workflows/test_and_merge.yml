@@ -57,14 +57,14 @@ jobs:
         - name: Try to use markdown2man action at testing branch to build our test manpage.
           uses: dante-signal31/markdown2man@testing
           with:
-              markdown_file: tests/resources/README.md
+              markdown_file: src/tests/resources/README.md
               manpage_name: cifra
               manpage_section: 1
 
         - name: Check that markdown actually generated a correct manpage.
           shell: bash
           run: |
-            test -f tests/resources/cifra.1.gz || { echo "Manpage not found"; exit 1; }
+            test -f src/tests/resources/cifra.1.gz || { echo "Manpage not found"; exit 1; }
 
     merge-master:
       runs-on: ubuntu-latest

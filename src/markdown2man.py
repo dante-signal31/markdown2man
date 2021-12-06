@@ -16,11 +16,8 @@ def _check_file_exists(file: str) -> str:
     :return: Given string if it is actually a file.
     """
     if os.path.exists(file):
-        print(f"Current file exists: {file}")
         return file
     else:
-        # os.path.join(os.getcwd(), 'src')
-        print(f"Current folder contents: {os.listdir(os.getcwd())}")
         raise argparse.ArgumentTypeError(f"Given file {file} does not exists.")
 
 
@@ -92,7 +89,7 @@ def main(args=sys.argv[1:]) -> None:
     m2mlib.copy_manpage(
         source_file=manpage,
         destination_folder=arguments.get("manpage_folder", os.path.dirname(arguments["markdown_file"])))
-
+    print(os.listdir("src/tests/resources/"))
 
 if __name__ == "__main__":
     main()

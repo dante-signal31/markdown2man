@@ -32,4 +32,4 @@ runs:
     WORKING_FOLDER: /work
 
   args:
-    - -v ./:${{ env.WORKING_FOLDER }} ${{ env.WORKING_FOLDER }}/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f ${{ env.WORKING_FOLDER }}/${{ inputs.manpage_folder }}
+    - -v ./:${WORKING_FOLDER} ${WORKING_FOLDER}/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f ${WORKING_FOLDER}/${{ inputs.manpage_folder }}

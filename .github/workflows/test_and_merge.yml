@@ -32,32 +32,32 @@ jobs:
           run: |
             python -m pytest
     
-    merge-testing:
-      runs-on: ubuntu-latest
-      needs: unit-tests
-      steps:
-        - name: Get source code from repository,
-          uses: actions/checkout@v2
-
-        - name: Merge staging with testing.
-          uses: devmasx/merge-branch@master
-          with:
-            type: now
-            from_branch: staging
-            target_branch: testing
-            github_token: ${{ secrets.GITHUB_TOKEN }}
+#    merge-testing:
+#      runs-on: ubuntu-latest
+#      needs: unit-tests
+#      steps:
+#        - name: Get source code from repository,
+#          uses: actions/checkout@v2
+#
+#        - name: Merge staging with testing.
+#          uses: devmasx/merge-branch@master
+#          with:
+#            type: now
+#            from_branch: staging
+#            target_branch: testing
+#            github_token: ${{ secrets.GITHUB_TOKEN }}
 
     integration-tests:
       runs-on: ubuntu-latest
-      needs: merge-testing
+      needs: unit-tests
       steps:
         - name: Get source code from repository.
           uses: actions/checkout@v2
 
         - name: Try to use markdown2man action at testing branch to build our test manpage.
-          uses: dante-signal31/markdown2man@testing
+          uses: dante-signal31/markdown2man@staging
           with:
-              markdown_file: src/tests/resources/README.md
+              markdown_file: /src/tests/resources/README.md
               manpage_name: cifra
               manpage_section: 1
 

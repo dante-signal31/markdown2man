@@ -23,4 +23,4 @@ COPY src/* /script/
 RUN chmod 755 /script/markdown2man.py
 
 # Set markdown2man as this image entrypoint.
-ENTRYPOINT ["python /script/markdown2man.py"]
+ENTRYPOINT ["/script/markdown2man.py"]

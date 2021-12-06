@@ -60,6 +60,7 @@ jobs:
               markdown_file: src/tests/resources/README.md
               manpage_name: cifra
               manpage_section: 1
+              manpage_folder: src/tests/resources/
 
         - name: Check that markdown actually generated a correct manpage.
           shell: bash

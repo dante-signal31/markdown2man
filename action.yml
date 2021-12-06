@@ -31,8 +31,8 @@ runs:
 
   args:
 #    - -v ./:/work/ /work/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f /work/${{ inputs.manpage_folder }}
-    - ${{ inputs.markdown_file }}
+    - $GITHUB_WORKSPACE/${{ inputs.markdown_file }}
     - ${{ inputs.manpage_name }}
     - -s ${{ inputs.manpage_section }}
     - -t "${{ inputs.manpage_title }}"
-    - -f ${{ inputs.manpage_folder }}
+    - -f $GITHUB_WORKSPACE/${{ inputs.manpage_folder }}

@@ -57,7 +57,7 @@ jobs:
         - name: Try to use markdown2man as an action to build our test manpage.
           uses: dante-signal31/markdown2man@staging
           with:
-              markdown_file: /src/tests/resources/README.md
+              markdown_file: src/tests/resources/README.md
               manpage_name: cifra
               manpage_section: 1
 

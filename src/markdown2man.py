@@ -18,6 +18,7 @@ def _check_file_exists(file: str) -> str:
     if os.path.exists(file):
         return file
     else:
+        print(f"Current folder contents: {os.listdir(os.path.dirname(file))}")
         raise argparse.ArgumentTypeError(f"Given file {file} does not exists.")
 
 

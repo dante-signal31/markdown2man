@@ -54,7 +54,7 @@ jobs:
         - name: Get source code from repository.
           uses: actions/checkout@v2
 
-        - name: Try to use markdown2man action at testing branch to build our test manpage.
+        - name: Try to use markdown2man as an action to build our test manpage.
           uses: dante-signal31/markdown2man@staging
           with:
               markdown_file: /src/tests/resources/README.md

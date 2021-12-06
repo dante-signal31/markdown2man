@@ -4,7 +4,7 @@ import os
 import sys
 from typing import List, Dict
 
-from script.m2mlib import *
+from .m2mlib import *
 
 DEFAULT_MANPAGE_SECTION = 1
 

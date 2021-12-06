@@ -28,8 +28,6 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  env:
-    WORKING_FOLDER: /work
 
   args:
-    - -v ./:$WORKING_FOLDER $WORKING_FOLDER/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f $WORKING_FOLDER/${{ inputs.manpage_folder }}
+    - -v ./:/work/ /work/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f /work/${{ inputs.manpage_folder }}

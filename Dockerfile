@@ -28,4 +28,4 @@ COPY src/* $SCRIPT_PATH/
 RUN chmod 755 $SCRIPT_PATH/markdown2man.py
 
 # Set markdown2man as this image entrypoint.
-ENTRYPOINT ["${SCRIPT_PATH}/markdown2man.py"]
+ENTRYPOINT ["/script/markdown2man.py"]

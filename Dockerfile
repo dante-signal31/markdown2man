@@ -13,13 +13,8 @@ RUN set -e
 RUN apt-get update \
     && apt-get install pandoc -y
 
-#RUN apt-get install python3-pip -y
-
-
 # Set folder for our script.
 ENV SCRIPT_PATH /script
-# Update PYTHONPATH to find out lib.
-#ENV PYTHONPATH "${PYTHONPATH}:${SCRIPT_PATH}/"
 
 # Get markdown2man dependencies.
 COPY requirements.txt $SCRIPT_PATH/

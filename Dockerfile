@@ -18,9 +18,9 @@ RUN apt-get update \
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy markdown2man script.
-COPY script/* /script/
-RUN chmod 755 /script/markdown2man.py
+# Copy markdown2man src.
+COPY src/* /script/
+RUN chmod 755 /src/markdown2man.py
 
 # Set markdown2man as this image entrypoint.
-ENTRYPOINT ["/script/markdown2man.py"]
+ENTRYPOINT ["python /script/markdown2man.py"]

@@ -8,6 +8,16 @@
 
 A GitHub Action to convert a markdown document into a man page.
 
+This way you only have to keep updated your README.md and generate your application
+man page from it with this action.
+
+Be aware that to keep things visually coherent with text structure expected for
+a man page your README.md should have every section expected in a man page and 
+you should avoid some text structures not easily convertable to man page format.
+You'd better read [this article](https://www.dlab.ninja/2021/10/how-to-write-manpages-with-markdown-and.html)
+about this method of man page generation. This action uses the basics explained 
+in that article. 
+
 ## Inputs
 
 **Required:**

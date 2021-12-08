@@ -34,6 +34,26 @@ def test_launcher_all_options_given(temp_dir):
     assert recovered_content == expected_content
 
 
+def test_launcher_all_long_options_given(temp_dir):
+    # Setup test.
+    temporal_markdown_file = os.path.join(temp_dir, "README.md")
+    test_ops.copy_file("src/tests/resources/README.md", temporal_markdown_file)
+    command_args = [f"{temporal_markdown_file}", "cifra", "--manpage_section", "1", "--manpage_title",
+                    "cifra usage documentation"]
+    expected_output_file = os.path.join(temp_dir, "cifra.1.gz")
+    recovered_content = ""
+    expected_content = ""
+    with open("src/tests/resources/cifra.1") as manpage:
+        expected_content = manpage.read()
+
+    # Perform test.
+    assert not os.path.exists(expected_output_file)
+    markdown2man.main(command_args)
+    assert os.path.exists(expected_output_file)
+    with gzip.open(expected_output_file) as output_file:
+        recovered_content = "".join(line.decode() for line in output_file.readlines())
+    assert recovered_content == expected_content
+
 def test_launcher_section_changed(temp_dir):
     # Setup test.
     temporal_markdown_file = os.path.join(temp_dir, "README.md")

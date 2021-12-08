@@ -33,6 +33,6 @@ runs:
 #    - -v ./:/work/ /work/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f /work/${{ inputs.manpage_folder }}
     - ${{ inputs.markdown_file }}
     - ${{ inputs.manpage_name }}
-    - --manpage_section ${{ inputs.manpage_section }}
-    - --manpage_title "${{ inputs.manpage_title }}"
-    - --manpage_folder ${{ inputs.manpage_folder }}
+    - -s${{ inputs.manpage_section }}
+    - -t"${{ inputs.manpage_title }}"
+    - -f${{ inputs.manpage_folder }}

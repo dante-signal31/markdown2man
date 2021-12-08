@@ -100,4 +100,6 @@ def copy_manpage(source_file: str, destination_folder: str) -> None:
     :param source_file: Current manpage pathname.
     :param destination_folder: Folder to copy on source_file.
     """
+    # Make sure destination folder already exists before copying.
+    os.makedirs(destination_folder, exist_ok=True)
     shutil.copy(source_file, destination_folder)

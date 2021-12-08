@@ -106,6 +106,7 @@ def main(args=sys.argv[1:]) -> None:
         manpage_name=arguments["manpage_name"],
         manpage_section=int(arguments["manpage_section"]),
         manpage_title=arguments.get("manpage_title", arguments["manpage_name"]))
+    print(f"Output name: _{arguments['manpage_name']}.{arguments['manpage_section']}_")
     manpage = m2mlib.convert_file(
         source_file=source_file_preprocessed,
         output_name=arguments["manpage_name"],

@@ -100,7 +100,7 @@ def main(args=sys.argv[1:]) -> None:
     leave it empty and it will populated with sys.argv values.
     """
     arguments: Dict[str, str] = parse_args(args)
-    arguments = _prepend_path_prefix(arguments)
+    # arguments = _prepend_path_prefix(arguments)
     source_file_preprocessed = m2mlib.preprocess_source_file(
         source_file=arguments["markdown_file"],
         manpage_name=arguments["manpage_name"],

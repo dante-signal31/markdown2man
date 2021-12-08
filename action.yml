@@ -19,7 +19,7 @@ inputs:
   manpage_folder:
     description: Output folder for converted man page.
     required: false
-    default: "."
+#    default: "."
   manpage_title:
     description: Title for converted manpage.
     required: false

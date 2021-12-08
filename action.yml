@@ -19,7 +19,7 @@ inputs:
   manpage_folder:
     description: Output folder for converted man page.
     required: false
-    default: "."
+#    default: "."
   manpage_title:
     description: Title for converted manpage.
     required: false
@@ -28,8 +28,11 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  env:
-    WORKING_FOLDER: /work
 
   args:
-    - -v ./:${{ env.WORKING_FOLDER }} ${{ env.WORKING_FOLDER }}/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f ${{ env.WORKING_FOLDER }}/${{ inputs.manpage_folder }}
+#    - -v ./:/work/ /work/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f /work/${{ inputs.manpage_folder }}
+    - ${{ inputs.markdown_file }}
+    - ${{ inputs.manpage_name }}
+    - -s${{ inputs.manpage_section }}
+    - -t"${{ inputs.manpage_title }}"
+    - -f${{ inputs.manpage_folder }}

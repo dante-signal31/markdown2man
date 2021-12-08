@@ -21,31 +21,6 @@ def _check_file_exists(file: str) -> str:
         raise argparse.ArgumentTypeError(f"Given file {file} does not exists.")
 
 
-def _get_folder_path_prefix() -> str:
-    """ Check if we are running inside a Github Action and returns the real path
-    were application files are actually stored.
-
-    If we aren't running inside Github Action an empty string is returned.
-
-    :return: Prefix for application folder.
-    """
-    return os.getenv("GITHUB_WORKSPACE", "")
-
-
-def _prepend_path_prefix(args: Dict[str, str])-> Dict[str, str]:
-    """ If we are running inside a GitHub Action prepend its real path where
-    application is actually stored.
-
-    :param args: User arguments as output by parse_arguments()
-    :return: The same arguments with prefix prepended in arguments where a path is provided.
-    """
-    path_arguments = {"markdown_file", "manpage_folder"}
-    if (prefix := _get_folder_path_prefix() != ""):
-        for key in path_arguments:
-            args[key] = os.path.join(prefix, args[key])
-    return args
-
-
 def parse_args(args: List[str]) -> Dict[str, str]:
     """ Parse given arguments
 
@@ -100,13 +75,11 @@ def main(args=sys.argv[1:]) -> None:
     leave it empty and it will populated with sys.argv values.
     """
     arguments: Dict[str, str] = parse_args(args)
-    # arguments = _prepend_path_prefix(arguments)
     source_file_preprocessed = m2mlib.preprocess_source_file(
         source_file=arguments["markdown_file"],
         manpage_name=arguments["manpage_name"],
         manpage_section=int(arguments["manpage_section"]),
         manpage_title=arguments.get("manpage_title", arguments["manpage_name"]))
-    print(f"Output name: _{arguments['manpage_name']}.{arguments['manpage_section']}_")
     manpage = m2mlib.convert_file(
         source_file=source_file_preprocessed,
         output_name=arguments["manpage_name"],
@@ -116,8 +89,6 @@ def main(args=sys.argv[1:]) -> None:
     m2mlib.copy_manpage(
         source_file=manpage,
         destination_folder=arguments.get("manpage_folder", os.path.dirname(arguments["markdown_file"])))
-    # print(f"Default manpage folder: {os.path.dirname(arguments['markdown_file'])}")
-    # print(os.listdir("/work/src/tests/resources/"))
 
 
 if __name__ == "__main__":

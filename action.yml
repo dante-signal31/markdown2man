@@ -19,7 +19,6 @@ inputs:
   manpage_folder:
     description: Output folder for converted man page.
     required: false
-#    default: "."
   manpage_title:
     description: Title for converted manpage.
     required: false
@@ -28,11 +27,10 @@ inputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-
   args:
-#    - -v ./:/work/ /work/${{ inputs.markdown_file }} ${{ inputs.manpage_name }} -s ${{ inputs.manpage_section }} -t ${{ inputs.manpage_title }} -f /work/${{ inputs.manpage_folder }}
     - ${{ inputs.markdown_file }}
     - ${{ inputs.manpage_name }}
+    # Don't leave spaces between short flags and its values or those spaces will end in your arguments strings.
     - -s${{ inputs.manpage_section }}
     - -t"${{ inputs.manpage_title }}"
     - -f${{ inputs.manpage_folder }}

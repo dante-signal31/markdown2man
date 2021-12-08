@@ -100,7 +100,4 @@ def copy_manpage(source_file: str, destination_folder: str) -> None:
     :param source_file: Current manpage pathname.
     :param destination_folder: Folder to copy on source_file.
     """
-    print(f"Source file: {source_file}")
-    print(f"Destination folder: {destination_folder}")
-    print(f"Destination folder exists: {os.path.exists(destination_folder)}")
     shutil.copy(source_file, destination_folder)

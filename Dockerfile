@@ -20,12 +20,12 @@ ENV SCRIPT_PATH /script
 COPY requirements.txt $SCRIPT_PATH/
 RUN pip install --no-cache-dir -r $SCRIPT_PATH/requirements.txt
 
-# Copy markdown2man src.
+# Copy markdown2man scripts to image folder.
 COPY src/lib/* $SCRIPT_PATH/lib/
 COPY src/markdown2man.py $SCRIPT_PATH/
+# Make it globally executable.
 RUN chmod 755 $SCRIPT_PATH/markdown2man.py
+RUN ln -s $SCRIPT_PATH/markdown2man.py /usr/bin/markdown2man
 
 # Set markdown2man as this image entrypoint.
-#ENTRYPOINT ["/script/markdown2man.py"]
-ENTRYPOINT exec $SCRIPT_PATH/markdown2man.py
-CMD $SCRIPT_PATH/markdown2man.py $INPUT_MARKDOWN_FILE $INPUT_MANPAGE_NAME
+ENTRYPOINT ["markdown2man"]

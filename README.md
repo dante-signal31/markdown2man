@@ -1,4 +1,6 @@
 # markdown2man
+NOT WORKING YET !!!!!!!
+
 
 A GitHub Action to convert a markdown document into a man page.
 
@@ -26,3 +28,4 @@ folder as markdown_file.
 ```
 
 With that configuration a man file called cifra.2.gz should be created at man folder.
+If manpage_folder does not exist then markdown2man creates it for you.

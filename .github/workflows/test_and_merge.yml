@@ -46,12 +46,10 @@ jobs:
               manpage_name: cifra
               manpage_section: 2
               manpage_folder: man/
-#              manpage_folder: src/tests/resources/
 
         - name: Check that markdown actually generated a correct manpage.
           shell: bash
           run: |
-#            test -f src/tests/resources/cifra.1.gz || { echo "Manpage not found"; exit 1; }
             test -f man/cifra.2.gz || { echo "Manpage not found"; exit 1; }
 
     merge-master:

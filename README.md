@@ -33,7 +33,7 @@ folder as markdown_file.
 ## Usage
 
 ```yaml
- uses: dante-signal31/markdown2man@main
+ uses: dante-signal31/markdown2man@v1.0.0
     with:
         markdown_file: src/tests/resources/README.md
         manpage_name: cifra

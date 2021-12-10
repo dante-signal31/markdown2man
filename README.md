@@ -39,6 +39,7 @@ folder as markdown_file.
         manpage_name: cifra
         manpage_section: 2
         manpage_folder: man/
+        manpage_title: "How to use cifra"
 ```
 
 With that configuration a man file called cifra.2.gz should be created at man folder.

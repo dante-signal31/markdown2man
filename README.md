@@ -33,13 +33,14 @@ folder as markdown_file.
 ## Usage
 
 ```yaml
- uses: dante-signal31/markdown2man@v1.0.0
-    with:
-        markdown_file: src/tests/resources/README.md
-        manpage_name: cifra
-        manpage_section: 2
-        manpage_folder: man/
-        manpage_title: "How to use cifra"
+ - name: Create a man page from current README.md.
+   uses: dante-signal31/markdown2man@v1.0.0
+   with:
+     markdown_file: src/tests/resources/README.md
+     manpage_name: cifra
+     manpage_section: 2
+     manpage_folder: man/
+     manpage_title: "How to use cifra"
 ```
 
 With that configuration a man file called cifra.2.gz should be created at man folder.

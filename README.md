@@ -18,6 +18,9 @@ You'd better read [this article](https://www.dlab.ninja/2021/10/how-to-write-man
 about this method of man page generation. This action uses the basics explained 
 in that article. 
 
+This Action has been used as an example in [this tutorial](https://www.dlab.ninja/2021/12/how-to-create-your-own-custom-actions.html) 
+about how to develop your own custom Actions.
+
 ## Inputs
 
 **Required:**
